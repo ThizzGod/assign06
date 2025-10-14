@@ -131,4 +131,25 @@ public class SinglyLinkedList<E> implements List<E>{
 	public Iterator<E> iterator() {
 		return null;
 	}
+	
+	private class LinkedListIterator<E> implements Iterator<E> {
+
+		@Override
+		public boolean hasNext() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public E next() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		
+		@Override
+		public void remove() {
+			
+		}
+		
+	}
 }
