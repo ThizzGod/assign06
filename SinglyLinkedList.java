@@ -3,9 +3,15 @@ package assign06;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.IconifyAction;
+
 public class SinglyLinkedList<E> implements List<E>{
+	Node<E> head;
+	int size;
+	
 	public SinglyLinkedList() {
-		
+		this.head = null;
+		this.size = 0;
 	}
 	/**
 	 * Inserts an element at the beginning of the list.
@@ -14,7 +20,9 @@ public class SinglyLinkedList<E> implements List<E>{
 	 * @param element - the element to add
 	 */
 	public void insertFirst(E element) {
-		
+		Node<E> first = new Node<E>(element);
+		first.nextNode = head;
+		head = first;
 	}
 
 	/**
@@ -132,23 +140,54 @@ public class SinglyLinkedList<E> implements List<E>{
 		return null;
 	}
 	
-	private class LinkedListIterator<E> implements Iterator<E> {
+	private class LinkedListIterator implements Iterator<E> {
+		private Node<E> currentNode;
+		private Node<E> lastReturned;
+		private Node<E> beforeLastReturned;
+		private boolean canRemove;
+		
+		public LinkedListIterator() {
+			this.currentNode = head;
+			this.lastReturned = null;
+			this.beforeLastReturned = null;
+			this.canRemove = false;
+		}
 
 		@Override
 		public boolean hasNext() {
-			// TODO Auto-generated method stub
+			if (currentNode != null) {
+				return true;
+			}
 			return false;
 		}
 
 		@Override
 		public E next() {
-			// TODO Auto-generated method stub
-			return null;
+			E value;
+			if (!this.hasNext()) {
+				throw new NoSuchElementException();
+			}
+			beforeLastReturned = lastReturned;
+			lastReturned = currentNode;
+			currentNode = currentNode.nextNode;
+			value = lastReturned.value;
+			canRemove = true;
+			return value;
 		}
 		
 		@Override
 		public void remove() {
+			if (!canRemove) {
+				throw new IllegalStateException();
+			}
 			
+			if (beforeLastReturned == null) {
+				head = currentNode;
+			} else {
+				beforeLastReturned.nextNode = currentNode;
+			}
+			size--;
+			canRemove = false;
 		}
 		
 	}
