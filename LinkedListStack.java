@@ -3,6 +3,10 @@ package assign06;
 import java.util.NoSuchElementException;
 
 public class LinkedListStack<E> implements Stack<E>{
+	public LinkedListStack() {
+
+	}
+	
 	/**
 	 * Removes all of the elements from the stack.
 	 */

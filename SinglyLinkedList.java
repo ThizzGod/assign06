@@ -4,6 +4,9 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class SinglyLinkedList<E> implements List<E>{
+	public SinglyLinkedList() {
+		
+	}
 	/**
 	 * Inserts an element at the beginning of the list.
 	 * O(1) for a singly-linked list.
