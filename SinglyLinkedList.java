@@ -62,6 +62,9 @@ public class SinglyLinkedList<E> implements List<E>{
 	 * @throws NoSuchElementException if the list is empty
 	 */
 	public E getFirst() throws NoSuchElementException {
+		if (head == null) {
+			throw new NoSuchElementException();
+		}
 		return head.value;
 	}
 	
@@ -74,6 +77,9 @@ public class SinglyLinkedList<E> implements List<E>{
 	 * @throws IndexOutOfBoundsException if index is out of range (index < 0 || index >= size())
 	 */
 	public E get(int index) throws IndexOutOfBoundsException {
+		if (index < 0 || index >= size) {
+			throw new IndexOutOfBoundsException();
+		}
 		Node<E> currentNode = head;
 		for(int i = 0; i < index; i++) {
 			currentNode = currentNode.nextNode;
@@ -115,10 +121,9 @@ public class SinglyLinkedList<E> implements List<E>{
 			currentNode = currentNode.nextNode;
 		}
 		if (index == 0) {
-			this.deleteFirst();
-		} else {
-			size--;
-		}
+			return this.deleteFirst();
+		} 
+		size--;
 		E value = currentNode.nextNode.value;
 		currentNode.nextNode = currentNode.nextNode.nextNode;
 		return value;
@@ -172,6 +177,7 @@ public class SinglyLinkedList<E> implements List<E>{
 	 */
 	public void clear() {
 		this.head = null;
+		size = 0;
 	}
 	
 	/**
