@@ -3,7 +3,6 @@ package assign06;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.IconifyAction;
 
 public class SinglyLinkedList<E> implements List<E>{
 	Node<E> head;
@@ -34,7 +33,22 @@ public class SinglyLinkedList<E> implements List<E>{
 	 * @throws IndexOutOfBoundsException if index is out of range (index < 0 || index > size())
 	 */
 	public void insert(int index, E element) throws IndexOutOfBoundsException {
+		Node<E> insertNode = new Node<>(element);
+		Node<E> currentNode = head;
+		if (index > size || index < 0) {
+			throw new IndexOutOfBoundsException();
+		}
+		for (int i = 0; i < index - 1; i++) {
+			currentNode = currentNode.nextNode;
+		}
+		if (index == 0) {
+			insertFirst(element);
+			return;
+		}
 		
+		insertNode.nextNode = currentNode.nextNode;
+		currentNode.nextNode = insertNode;
+		size++;
 	}
 	
 	/**
@@ -45,7 +59,7 @@ public class SinglyLinkedList<E> implements List<E>{
 	 * @throws NoSuchElementException if the list is empty
 	 */
 	public E getFirst() throws NoSuchElementException {
-		return null;
+		return head.value;
 	}
 	
 	/**
@@ -56,8 +70,13 @@ public class SinglyLinkedList<E> implements List<E>{
 	 * @return the element at the position
 	 * @throws IndexOutOfBoundsException if index is out of range (index < 0 || index >= size())
 	 */
-	public E get(int index) throws IndexOutOfBoundsException {
-		return null;
+public E get(int index) throws IndexOutOfBoundsException {
+		Node<E> currentNode = head;
+		for(int i = 0; i < index; i++) {
+			currentNode = currentNode.nextNode;
+		}
+		return currentNode.value;
+
 	}
 	
 	/**
@@ -137,7 +156,7 @@ public class SinglyLinkedList<E> implements List<E>{
 	 * element to last element)
 	 */
 	public Iterator<E> iterator() {
-		return null;
+		return new LinkedListIterator();
 	}
 	
 	private class LinkedListIterator implements Iterator<E> {
