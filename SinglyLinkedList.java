@@ -3,6 +3,8 @@ package assign06;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import org.junit.experimental.theories.Theories;
+
 
 public class SinglyLinkedList<E> implements List<E>{
 	Node<E> head;
@@ -128,7 +130,16 @@ public class SinglyLinkedList<E> implements List<E>{
 	 * @return the index of the first occurrence; -1 if the element is not found
 	 */
 	public int indexOf(E element) {
-		return 0;
+		Node<E> currentNode = head;
+		int index = -1;
+		for (int i = 0; i < size; i++) {
+			if (currentNode.value.equals(element)) {
+				index = i;
+				break;
+			}
+			currentNode = currentNode.nextNode;
+		}
+		return index;
 	}
 	
 	/**
@@ -137,7 +148,7 @@ public class SinglyLinkedList<E> implements List<E>{
 	 * @return the number of elements in this list
 	 */
 	public int size() {
-		return 0;
+		return this.size;
 	}
 	
 	/**
@@ -146,6 +157,9 @@ public class SinglyLinkedList<E> implements List<E>{
 	 * @return true if this collection contains no elements; false, otherwise
 	 */
 	public boolean isEmpty() {
+		if (size == 0) {
+			return true;
+		}
 		return false;
 	}
 	
@@ -154,7 +168,7 @@ public class SinglyLinkedList<E> implements List<E>{
 	 * O(1) for a singly-linked list.
 	 */
 	public void clear() {
-
+		this.head = null;
 	}
 	
 	/**
@@ -165,7 +179,13 @@ public class SinglyLinkedList<E> implements List<E>{
 	 * @return an array containing all of the elements in this list, in order
 	 */
 	public Object[] toArray() {
-		return null;
+		Object[] array = new Object[size];
+		Node<E> currentNode = head;
+		for (int i = 0; i < size; i++) {
+			array[i] = currentNode.value;
+			currentNode = currentNode.nextNode;
+		}
+		return array;
 	}
 	
 	/**
