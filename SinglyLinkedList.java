@@ -3,17 +3,17 @@ package assign06;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import org.junit.experimental.theories.Theories;
 
 
 public class SinglyLinkedList<E> implements List<E>{
-	Node<E> head;
-	int size;
+	private Node<E> head;
+	private int size;
 	
 	public SinglyLinkedList() {
 		this.head = null;
 		this.size = 0;
 	}
+
 	/**
 	 * Inserts an element at the beginning of the list.
 	 * O(1) for a singly-linked list.
@@ -24,6 +24,7 @@ public class SinglyLinkedList<E> implements List<E>{
 		Node<E> first = new Node<E>(element);
 		first.nextNode = head;
 		head = first;
+		size++;
 	}
 
 	/**
