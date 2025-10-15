@@ -116,6 +116,8 @@ public class SinglyLinkedList<E> implements List<E>{
 		}
 		if (index == 0) {
 			this.deleteFirst();
+		} else {
+			size--;
 		}
 		E value = currentNode.nextNode.value;
 		currentNode.nextNode = currentNode.nextNode.nextNode;

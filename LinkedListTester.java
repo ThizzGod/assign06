@@ -39,6 +39,9 @@ class LinkedListTester {
 		}
 	}
 	
+	/*
+	 * getFirst was also checked in the insert first test
+	 */
 	@Test
 	void testGetFirstWithLoop() {
 		int i = 0;
@@ -78,6 +81,60 @@ class LinkedListTester {
 		assertEquals(600, last);
 	}
 	
+	/*
+	 * other cases of the get method were already effectively tested for 
+	 * middle and end along with insert
+	 */
+	@Test
+	void testGetAtBeginning() {
+		largerLinkedList.insertFirst(600);
+		assertEquals(600, largerLinkedList.get(0));
+	}
 	
+	@Test
+	void testSizeLargerList() {
+		assertEquals(100, largerLinkedList.size());
+	}
+	
+	@Test
+	void testSizeEmptyList() {
+		assertEquals(0, emptyLinkedList.size());
+	}
+	
+	@Test
+	void testDeleteFirst() {
+		largerLinkedList.deleteFirst();
+		assertEquals(98,largerLinkedList.getFirst() );
+		assertEquals(99, largerLinkedList.size());
+	}
+	
+	@Test
+	void testDeleteFirstListOfOneItem() {
+		emptyLinkedList.insertFirst(0);
+		emptyLinkedList.deleteFirst();
+		assertEquals(0, emptyLinkedList.size());
+	}
+	
+	@Test
+	void testDeleteMethodFirstItem() {
+		largerLinkedList.delete(0);
+		assertEquals(98,largerLinkedList.getFirst() );
+		assertEquals(99, largerLinkedList.size());
+	}
+	
+	@Test
+	void testDeleteMethodMiddleItemSmallList() {
+		emptyLinkedList.insertFirst(2);
+		emptyLinkedList.insertFirst(1);
+		emptyLinkedList.insertFirst(0);
+		
+		emptyLinkedList.delete(1);
+		assertEquals(-1, emptyLinkedList.indexOf(1));
+	}
 
+	@Test
+	void testDeleteMethodMiddleItem() {
+		largerLinkedList.delete(49);
+		assertEquals(-1, largerLinkedList.indexOf(50));
+	}
 }
